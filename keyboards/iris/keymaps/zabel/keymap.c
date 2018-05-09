@@ -4,24 +4,14 @@
 
 extern keymap_config_t keymap_config;
 
-//Multiple layouts, Programmers Dvorak as main.
-
 #define _DVORAK 0
-#define _QWERTY 1
-#define _COLEMAK 2
-#define _NAVIGATION 6
-#define _NUMBERS 7
-#define _ADJUST 16
+#define _NAVIGATION 1
 
 #define TAPPING_TOGGLE 2
 
 enum custom_keycodes {
   DVORAK = SAFE_RANGE,
-  QWERTY,
-  COLEMAK,
-  NAVIGATION,
-  NUMBERS,
-  ADJUST,
+  NAVIGATION
 };
 
 #define KC_ KC_TRNS
@@ -33,20 +23,6 @@ enum custom_keycodes {
 #define KC_RBRALT MT(MOD_RALT, KC_RBRC)
 #define KC_LGENT MT(MOD_LGUI, KC_ENT)
 #define KC_NSPC LT(_NAVIGATION, KC_SPC)
-
-/*
-#define KC_SELA LCTL(KC_A)
-#define KC_UDO LCTL(KC_Z)
-#define KC_SAV LCTL(KC_S)
-#define KC_PRT LCTL(KC_P)
-#define KC_SETT LCTL(KC_I)
-#define KC_EXP LCTL(KC_E)
-#define KC_DESK LCTL(KC_D)
-#define KC_LCK LCTL(KC_L)
-#define KC_CTLM LCTL(KC_M)
-#define KC_CTLR LCTL(KC_R) */
-
-
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -96,10 +72,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case NAVIGATION:
       if (record->event.pressed) {
         layer_on(_NAVIGATION);
-        update_tri_layer(_NAVIGATION, _NUMBERS, _ADJUST);
+
       } else {
         layer_off(_NAVIGATION);
-        update_tri_layer(_NAVIGATION, _NUMBERS, _ADJUST);
       }
       return false;
       break;
